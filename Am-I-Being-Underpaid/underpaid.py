@@ -95,18 +95,45 @@ def live_tracking(employee, earnings):
             print(f"Money Earned : {total_earned:.2f} {currency}")
             print("====================================")
     except KeyboardInterrupt:
-        final_report(employee, time_elapsed, total_earned)
+     final_report(employee, earnings, time_elapsed, total_earned)
 
-def final_report(employee, time_elapsed, total_earned):
+def final_report(employee, earnings , time_elapsed, total_earned  ):
     print("====================================")
-    print("        FINAL REPORT")
+    print("        📊 SESSION REPORT")
     print("====================================")
+
+    print("👤 Employee Information")
+    print("-------------------------------------")
     print(f"Name          : {employee['name']}")
     print(f"Company       : {employee['company_name']}")
     print(f"Currency      : {employee['currency']}")
+
+    print("💰 Session Statistics")
     print("------------------------------------")
     print(f"Time Tracked  : {time_elapsed} seconds")
     print(f"Total Earned  : {total_earned:.2f} {employee['currency']}")
+    salary_per_hour = earnings["salary_per_hour"]
+    salary_per_minute = earnings["salary_per_minute"]
+    salary_per_second = earnings["salary_per_second"]
+
+    projected_1_hour = salary_per_hour
+    projected_8_hours = salary_per_hour * 8
+    projected_monthly = employee["monthly_salary"]
+
+    print("💵 Salary Breakdown")
+    print("-------------------------------------")
+    print(f"Per Hour      : {salary_per_hour:.2f} {employee['currency']}")
+    print(f"Per Minute    : {salary_per_minute:.2f} {employee['currency']}")
+    print(f"Per Second    : {salary_per_second:.2f} {employee['currency']}")
+
+    print("📈 Projections")
+    print("-------------------------------------")
+    print(f"1 Hour        : {projected_1_hour:.2f} {employee['currency']}")
+    print(f"8 Hours       : {projected_8_hours:.2f} {employee['currency']}")
+    print(f"Monthly Salary: {projected_monthly:.2f} {employee['currency']}")
+
+    print("====================================")
+    print("Thanks for using the tracker!")
     print("====================================")
 
 def main_menu( employee , earnings):
@@ -158,7 +185,6 @@ def load_employee():
     
 def run_application(employee):
     earnings = calculate_earnings(employee)
-    summary(employee, earnings)
     main_menu(employee, earnings)
 
 
