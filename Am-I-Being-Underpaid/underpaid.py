@@ -108,9 +108,45 @@ def final_report(employee, time_elapsed, total_earned):
     print(f"Total Earned  : {total_earned:.2f} {employee['currency']}")
     print("====================================")
 
+def main_menu( employee , earnings):
+    while True:
+        print("==============================================")
+        print("                 MAIN MENU")
+        print("==============================================")
+        print("1. View Salary Summary")
+        print("2. Start Live Earnings Tracker")
+        print("3. Enter Employee Information Again")
+        print("4. Exit")
+        print("==============================================")
+
+        user_choice = get_valid_int("Enter your choice: ")
+
+        if user_choice == 1:
+            summary(employee, earnings)
+
+        elif user_choice == 2:
+            live_tracking(employee, earnings)
+
+        elif user_choice == 3:
+            employee = user_info_collection()
+            earnings = calculate_earnings(employee)
+            summary(employee, earnings)
+
+        elif user_choice == 4:
+            print("\nThank you for using 'Am I Being Underpaid?'")
+            print("Goodbye!")
+            break
+
+        else:
+            print("\nInvalid choice. Please try again.")
+
+
+
+
 
 welcome()
 employee = user_info_collection()
 earnings = calculate_earnings(employee)
 summary(employee, earnings)
 live_tracking(employee, earnings)
+main_menu(employee , earnings)
