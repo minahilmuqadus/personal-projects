@@ -2,6 +2,7 @@ import time
 import sys
 import threading
 import os
+import json
 
 def get_valid_float(message):
     while True:
@@ -129,8 +130,9 @@ def main_menu( employee , earnings):
 
         elif user_choice == 3:
             employee = user_info_collection()
-            earnings = calculate_earnings(employee)
-            summary(employee, earnings)
+            save_employee(employee)
+            run_application(employee)
+            break
 
         elif user_choice == 4:
             print("\nThank you for using 'Am I Being Underpaid?'")
@@ -140,13 +142,58 @@ def main_menu( employee , earnings):
         else:
             print("\nInvalid choice. Please try again.")
 
+def save_employee(employee):
+    with open ("employee.json" , "w" ) as file :
+        json.dump(employee , file , indent=4)
 
 
+def load_employee():
+    try:
+        with open("employee.json", "r") as file:
+            employee = json.load(file)
+            return employee
+
+    except FileNotFoundError:
+        return None
+    
+def run_application(employee):
+    earnings = calculate_earnings(employee)
+    summary(employee, earnings)
+    main_menu(employee, earnings)
 
 
-welcome()
-employee = user_info_collection()
-earnings = calculate_earnings(employee)
-summary(employee, earnings)
-live_tracking(employee, earnings)
-main_menu(employee , earnings)
+def start_application():
+    welcome()
+
+    employee = load_employee()
+
+    if employee is not None:
+        print("\nWelcome Back,", employee["name"] + "!")
+        print("====================================")
+        print("1. Continue with saved employee")
+        print("2. Enter new employee")
+        print("====================================")
+
+        choice = get_valid_int("Enter your choice: ")
+
+        if choice == 1:
+            run_application(employee)
+
+        elif choice == 2:
+            employee = user_info_collection()
+            save_employee(employee)
+            run_application(employee)
+
+        else:
+            print("Invalid choice.")
+            return
+
+    else:
+
+     print("No saved employee found.")
+     employee = user_info_collection()
+     save_employee(employee)
+     run_application(employee)
+
+
+start_application()
