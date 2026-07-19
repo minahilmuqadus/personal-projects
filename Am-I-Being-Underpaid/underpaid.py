@@ -4,6 +4,11 @@ import threading
 import os
 import json
 
+TEA_PRICE = 50
+BURGER_PRICE = 500
+BUS_TICKET_PRICE = 80
+PIZZA_SLICE_PRICE = 250
+
 def get_valid_float(message):
     while True:
         try:
@@ -108,8 +113,8 @@ def final_report(employee, earnings , time_elapsed, total_earned  ):
     print(f"Company       : {employee['company_name']}")
     print(f"Currency      : {employee['currency']}")
 
-    print("💰 Session Statistics")
-    print("------------------------------------")
+    #print("💰 Session Statistics")
+    #print("------------------------------------")
     print(f"Time Tracked  : {time_elapsed} seconds")
     print(f"Total Earned  : {total_earned:.2f} {employee['currency']}")
     salary_per_hour = earnings["salary_per_hour"]
@@ -120,12 +125,18 @@ def final_report(employee, earnings , time_elapsed, total_earned  ):
     projected_8_hours = salary_per_hour * 8
     projected_monthly = employee["monthly_salary"]
 
-    print("💵 Salary Breakdown")
-    print("-------------------------------------")
+    print("💰 Session Statistics")
+    print("------------------------------------")
+
+    formatted_time = time.strftime("%H:%M:%S", time.gmtime(time_elapsed))
+
+    print(f"Time Tracked  : {formatted_time}")
+    print(f"Total Earned  : {total_earned:.2f} {employee['currency']}")
     print(f"Per Hour      : {salary_per_hour:.2f} {employee['currency']}")
     print(f"Per Minute    : {salary_per_minute:.2f} {employee['currency']}")
     print(f"Per Second    : {salary_per_second:.2f} {employee['currency']}")
-
+    
+    
     print("📈 Projections")
     print("-------------------------------------")
     print(f"1 Hour        : {projected_1_hour:.2f} {employee['currency']}")
@@ -135,6 +146,18 @@ def final_report(employee, earnings , time_elapsed, total_earned  ):
     print("====================================")
     print("Thanks for using the tracker!")
     print("====================================")
+
+    print("🎯 Fun Facts")
+    print("------------------------------------")
+    cups_of_tea   = int(total_earned / TEA_PRICE )
+    print(f"☕ Cups of Tea    : {cups_of_tea}")
+    burgers = int(total_earned / BURGER_PRICE)
+    print(f"🍔 Burgers          : {burgers}")
+    bus_tickets = int(total_earned / BUS_TICKET_PRICE)
+    print(f"🚌 Bus Tickets      : {bus_tickets}")
+    pizza_slices = int(total_earned / PIZZA_SLICE_PRICE)
+    print(f"🍕 Pizza Slices      : {pizza_slices}")
+    print("------------------------------------")
 
 def main_menu( employee , earnings):
     while True:
@@ -185,6 +208,10 @@ def load_employee():
     
 def run_application(employee):
     earnings = calculate_earnings(employee)
+
+    salary_analysis(employee)
+
+
     main_menu(employee, earnings)
 
 
@@ -221,5 +248,27 @@ def start_application():
      save_employee(employee)
      run_application(employee)
 
-
+def salary_analysis(employee):
+    monthly_salary = employee["monthly_salary"]
+    if monthly_salary < 35000:
+        print("🔴 Salary Status")
+        print("Underpaid")
+        print("💡 Advice")
+        print("Consider negotiating your salary,")
+        print("learning high-income skills,")
+        print("or exploring better opportunities.")
+    elif monthly_salary >= 35000 and monthly_salary <=75000:
+        print("🟡 Salary Status: ")
+        print("Fair Salary")
+        print("💡 Advice")
+        print("You're doing okay.")
+        print("Keep improving your skills")
+        print("to move into a higher salary bracket.")
+    else:
+        print("🟢 Salary Status")
+        print("Well Paid")
+        print("💡 Advice")
+        print("Great job!")
+        print("Keep learning and investing in yourself.")
+        
 start_application()
