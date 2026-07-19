@@ -4,6 +4,7 @@ import threading
 import os
 import json
 
+
 TEA_PRICE = 50
 BURGER_PRICE = 500
 BUS_TICKET_PRICE = 80
@@ -102,6 +103,66 @@ def live_tracking(employee, earnings):
     except KeyboardInterrupt:
      final_report(employee, earnings, time_elapsed, total_earned)
 
+def potty_mode(employee, earnings):
+    print("====================================")
+    print("        🚽 POTTY MODE")
+    print("====================================")
+    print("Go do your business...")
+    print("Timer Started!")
+    print()
+
+    start_time = time.time()
+
+    input("Press ENTER when you're back...")
+
+    end_time = time.time()
+
+    time_elapsed = int(end_time - start_time)
+
+    salary_per_second = earnings["salary_per_second"]
+    total_earned = salary_per_second * time_elapsed
+
+    potty_report(employee, earnings, time_elapsed, total_earned)
+    
+
+def potty_report(employee, earnings, time_elapsed, total_earned):
+    print("====================================")
+    print("        🚽 POTTY REPORT")
+    print("====================================")
+
+    formatted_time = time.strftime("%H:%M:%S", time.gmtime(time_elapsed))
+
+    print(f"Bathroom Time : {formatted_time}")
+    print(f"Money Earned  : {total_earned:.2f} {employee['currency']}")
+
+    print("====================================")
+
+    
+    print("🚽 Bathroom Rating")
+    print("------------------------------------")
+
+    if time_elapsed < 120:
+     print("⚡ Speed Runner")
+     print("You broke the land speed record.")
+
+    elif time_elapsed < 300:
+     print("⭐ Perfect Balance")
+     print("Quick, efficient, and productive.")
+
+    elif time_elapsed < 600:
+     print("😌 Relaxed Visit")
+     print("Hope you solved all of life's problems.")
+
+    elif time_elapsed < 1200:
+     print("📱 Scrolling Detected")
+     print("Let's be honest... you were scrolling.")
+
+    else:
+     print("🏠 New Address Registered")
+     print("Should we update your mailing address?")
+
+print("====================================")
+
 def final_report(employee, earnings , time_elapsed, total_earned  ):
     print("====================================")
     print("        📊 SESSION REPORT")
@@ -168,9 +229,12 @@ def main_menu( employee , earnings):
         print("2. Start Live Earnings Tracker")
         print("3. Enter Employee Information Again")
         print("4. Exit")
+        print("5. 🚽 Potty Mode")
         print("==============================================")
 
+        
         user_choice = get_valid_int("Enter your choice: ")
+        
 
         if user_choice == 1:
             summary(employee, earnings)
@@ -185,9 +249,13 @@ def main_menu( employee , earnings):
             break
 
         elif user_choice == 4:
-            print("\nThank you for using 'Am I Being Underpaid?'")
+            print("\nEvery second you work is buying something.")
+            print("Make sure it's buying the life you want.")
             print("Goodbye!")
             break
+
+        elif user_choice == 5:
+         potty_mode(employee, earnings)
 
         else:
             print("\nInvalid choice. Please try again.")
@@ -270,5 +338,5 @@ def salary_analysis(employee):
         print("💡 Advice")
         print("Great job!")
         print("Keep learning and investing in yourself.")
-        
+
 start_application()
