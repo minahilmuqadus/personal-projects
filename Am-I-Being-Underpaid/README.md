@@ -112,19 +112,19 @@ python underpaid.py
 
 ### 💸 Live Earnings Tracker
 
-![Live Tracker](screenshots/live_tracker.png)
+![Live Tracker](screenshots/live_tracker.PNG)
 
 ---
 
 ### 🚽 Potty Mode
 
-![Potty Mode](screenshots/potty_mode.png)
+![Potty Mode](screenshots/potty_mode.PNG)
 
 ---
 
 ### 🌟 Dream Progress
 
-![Dream Progress](screenshots/dream_progress.png)
+![Dream Progress](screenshots/dream_progress.PNG)
 
 ## 🚀 Future Improvements
 
