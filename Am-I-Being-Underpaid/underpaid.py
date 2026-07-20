@@ -1,6 +1,4 @@
 import time
-import sys
-import threading
 import os
 import json
 
@@ -26,8 +24,9 @@ def get_valid_int(message):
 
 def welcome():
     print("=======================================================")
-    print("             💸 AM I BEING UNDERPAID? 💸")
+    print("       💸 AM I BEING UNDERPAID? 💸                     ")  
     print("=======================================================")
+    print()
     print("Welcome to the world's most unnecessary")
     print("yet strangely satisfying salary tracker.")
     print()
@@ -35,8 +34,12 @@ def welcome():
     print("you're earning every second.")
     print()
     print("🚽 Featuring the legendary Potty Mode.")
+    print("🌟 Chase your dream with Dream Progress.")
+    print()
     print("=======================================================")
-    input("Press ENTER to begin...")
+    print("Press ENTER to begin...")
+
+
 
 def user_info_collection():
     name = input("Enter Name: ")
@@ -176,8 +179,7 @@ def final_report(employee, earnings , time_elapsed, total_earned  ):
 
     #print("💰 Session Statistics")
     #print("------------------------------------")
-    print(f"Time Tracked  : {time_elapsed} seconds")
-    print(f"Total Earned  : {total_earned:.2f} {employee['currency']}")
+    
     salary_per_hour = earnings["salary_per_hour"]
     salary_per_minute = earnings["salary_per_minute"]
     salary_per_second = earnings["salary_per_second"]
@@ -225,11 +227,13 @@ def main_menu( employee , earnings):
         print("==============================================")
         print("                 MAIN MENU")
         print("==============================================")
-        print("1. View Salary Summary")
-        print("2. Start Live Earnings Tracker")
-        print("3. Enter Employee Information Again")
-        print("4. Exit")
-        print("5. 🚽 Potty Mode")
+        print("1. 📊 Salary Summary")
+        print("2. 💸 Live Earnings Tracker")
+        print("3. 👤 Change Employee")
+        print("4. 🚽 Potty Mode")
+        print("5. 🌟 My Dream Progress")
+        print("6. 🚪 Exit")
+        print("")
         print("==============================================")
 
         
@@ -249,16 +253,21 @@ def main_menu( employee , earnings):
             break
 
         elif user_choice == 4:
+            potty_mode(employee, earnings)
+
+        
+
+        elif user_choice == 5:
+         my_dream_progress(employee)
+
+        elif user_choice == 6 :
+            
             print("\nEvery second you work is buying something.")
             print("Make sure it's buying the life you want.")
             print("Goodbye!")
             break
-
-        elif user_choice == 5:
-         potty_mode(employee, earnings)
-
         else:
-            print("\nInvalid choice. Please try again.")
+            print("Invalid")
 
 def save_employee(employee):
     with open ("employee.json" , "w" ) as file :
@@ -289,32 +298,35 @@ def start_application():
     employee = load_employee()
 
     if employee is not None:
-        print("\nWelcome Back,", employee["name"] + "!")
-        print("====================================")
-        print("1. Continue with saved employee")
-        print("2. Enter new employee")
-        print("====================================")
+     print("====================================")
+     print(f"👋 Welcome Back, {employee['name']}!")
+     print("------------------------------------")
+     print(f"🏢 Company : {employee['company_name']}")
+     print(f"💰 Salary  : {employee['monthly_salary']:.2f} {employee['currency']}")
+     print("====================================")
 
-        choice = get_valid_int("Enter your choice: ")
+     print("1. Continue with saved employee")
+     print("2. Enter employee information again")
+     print("3. Exit")
+     print("------------------------------------")
 
-        if choice == 1:
-            run_application(employee)
+     choice = get_valid_int("Enter your choice: ")
 
-        elif choice == 2:
-            employee = user_info_collection()
-            save_employee(employee)
-            run_application(employee)
+    if choice == 1:
+        run_application(employee)
 
-        else:
-            print("Invalid choice.")
-            return
+    elif choice == 2:
+        employee = user_info_collection()
+        save_employee(employee)
+        run_application(employee)
+
+    elif choice == 3:
+        print("\nGoodbye!")
+        return
 
     else:
-
-     print("No saved employee found.")
-     employee = user_info_collection()
-     save_employee(employee)
-     run_application(employee)
+        print("\n❌ Invalid choice.")
+        return
 
 def salary_analysis(employee):
     monthly_salary = employee["monthly_salary"]
@@ -325,7 +337,7 @@ def salary_analysis(employee):
         print("Consider negotiating your salary,")
         print("learning high-income skills,")
         print("or exploring better opportunities.")
-    elif monthly_salary >= 35000 and monthly_salary <=75000:
+    elif monthly_salary <= 75000:
         print("🟡 Salary Status: ")
         print("Fair Salary")
         print("💡 Advice")
@@ -338,5 +350,118 @@ def salary_analysis(employee):
         print("💡 Advice")
         print("Great job!")
         print("Keep learning and investing in yourself.")
+
+def save_dream(dream):
+    with open("dream.json", "w") as file:
+        json.dump(dream, file, indent=4)
+
+
+def load_dream():
+    try:
+        with open("dream.json", "r") as file:
+            dream = json.load(file)
+            return dream
+    except FileNotFoundError:
+        return None
+
+
+def dream_progress(employee, dream):
+    dream_price = dream["dream_price"]
+    monthly_salary = employee["monthly_salary"]
+
+    # -------------------------------
+    # Dream ETA Calculation
+    # -------------------------------
+
+    months = dream_price / monthly_salary
+
+    whole_months = int(months)
+
+    decimal_part = months - whole_months
+
+    days = round(decimal_part * 30)
+
+    # -------------------------------
+    # Progress Calculation
+    # -------------------------------
+
+    progress = (monthly_salary / dream_price) * 100
+
+    if progress > 100:
+        progress = 100
+
+    filled_blocks = int(progress / 5)   # 20 blocks total
+    empty_blocks = 20 - filled_blocks
+
+    progress_bar = ("█" * filled_blocks) + ("░" * empty_blocks)
+
+    # -------------------------------
+    # Dream Report
+    # -------------------------------
+
+    print("------------------------------------")
+    print(f"🎯 Dream            : {dream['dream_name']}")
+    print(f"💰 Dream Price      : {dream_price:.2f} {employee['currency']}")
+    print(f"💵 Monthly Salary   : {monthly_salary:.2f} {employee['currency']}")
+
+    if whole_months == 0:
+        print(f"⏳ Estimated Time   : {days} Days")
+    elif days == 0:
+        if whole_months == 1:
+            print("⏳ Estimated Time   : 1 Month")
+        else:
+            print(f"⏳ Estimated Time   : {whole_months} Months")
+    else:
+        if whole_months == 1:
+            print(f"⏳ Estimated Time   : 1 Month {days} Days")
+        else:
+            print(f"⏳ Estimated Time   : {whole_months} Months {days} Days")
+
+    print("------------------------------------")
+    print("🌟 Dream Progress")
+    print(f"{progress_bar} {progress:.0f}%")
+    print("------------------------------------")
+
+    # -------------------------------
+    # Motivation
+    # -------------------------------
+
+    if progress >= 100:
+        print("🎉 You can buy your dream now!")
+    elif progress >= 75:
+        print("🔥 You're almost there!")
+    elif progress >= 50:
+        print("💪 Keep grinding. You're halfway there!")
+    elif progress >= 25:
+        print("🚀 Great start. Keep saving!")
+    else:
+        print("🌱 Every journey begins with one step.")
+
+    print("------------------------------------")
+
+def my_dream_progress(employee):
+    print("====================================")
+    print("      🌟 MY DREAM PROGRESS")
+    print("====================================")
+
+    dream = load_dream()
+
+    if dream is None:
+        print("No dream found.")
+        print("Let's set one!\n")
+
+        dream_name = input("Enter your dream: ")
+        dream_price = get_valid_float("Enter your dream price: ")
+
+        dream = {
+            "dream_name": dream_name,
+            "dream_price": dream_price
+        }
+
+        save_dream(dream)
+
+        print("\n✅ Dream saved successfully!\n")
+
+    dream_progress(employee, dream)
 
 start_application()

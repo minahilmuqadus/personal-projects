@@ -1,157 +1,142 @@
 # 💸 Am I Being Underpaid?
 
-A fun Python terminal application that calculates exactly how much money you earn every hour, minute, and second based on your monthly salary and working hours.
+A fun and interactive Python application that tracks your salary in real time and answers the question:
 
-The project also includes a live earnings tracker that updates in real time, allowing you to see your earnings grow second by second while practicing core Python programming concepts such as functions, dictionaries, loops, exception handling, and modular program design.
+> **"Am I Being Underpaid?"**
 
-This project is part of my Python learning journey, where I focus on building real projects to strengthen my programming fundamentals and improve my problem-solving skills.
+Instead of simply calculating your monthly salary, this project shows how much money you earn every second, analyzes your salary, tracks your dream goals, and even includes a legendary **🚽 Potty Mode**.
 
 ---
 
 ## ✨ Features
 
-- 💰 Calculate salary per hour, minute, and second.
-- ⏱️ Real-time live earnings tracker.
-- 📋 Employee summary with salary breakdown.
-- ✅ Input validation to prevent invalid numeric input.
-- 🛑 Graceful program termination with a final earnings report.
-- 🧩 Clean and modular function-based program structure.
+### 💰 Salary Tracker
+- Enter employee information
+- Automatic salary calculations
+- Per hour, minute and second earnings
+- Salary projections
+
+### 📊 Salary Analysis
+- Underpaid / Fair Salary / Well Paid analysis
+- Helpful advice based on salary range
+
+### ⏱ Live Earnings Tracker
+- Real-time earnings display
+- Session report
+- Hourly, daily and monthly projections
+
+### 🚽 Potty Mode
+Because even bathroom breaks earn money.
+
+Features:
+- Bathroom timer
+- Money earned while away
+- Bathroom performance rating
+
+Ratings include:
+
+- ⚡ Speed Runner
+- ⭐⭐⭐⭐⭐ Perfect
+- 😌 Relaxed
+- 📱 Scrolling Detected
+- 🏠 New Address Registered
 
 ---
 
-## 🧠 Concepts Practiced
+### 🌟 Dream Progress
+Stay motivated while saving.
 
-- Python Functions
-- Dictionaries
-- Loops (`while`)
-- Input Validation (`try` / `except`)
-- Exception Handling
-- Return Values
-- Modular Programming
-- Formatted Output (f-strings)
-- Real-Time Terminal Updates
-- Basic Software Design
+Features:
+- Save your dream
+- Load your dream automatically
+- Dream price tracking
+- Estimated time to achieve your dream
+- Progress bar
+- Motivational messages
 
 ---
 
-## 🚀 Future Improvements
+## 💾 Data Storage
 
-- [ ] Potty Mode 🚽
-- [ ] Funny salary milestones and achievements.
-- [ ] Better time formatting (HH:MM:SS).
-- [ ] Save reports to a file.
-- [ ] Cross-platform terminal support.
-- [ ] Salary comparison with different work schedules.
-- [ ] Interactive menu system.
-- [ ] Sound notifications for earning milestones.
-- [ ] Progress bar for live earnings.
-- [ ] Graphical User Interface (GUI) version.
+The application automatically stores data using JSON files.
 
----
-
-## ▶️ How to Run
-
-### 1. Clone the repository
-
-```bash
-git clone <repository-url>
-```
-
-### 2. Navigate to the project folder
-
-```bash
-cd personal-projects
-```
-
-### 3. Make sure Python 3 is installed
-
-Check your Python version:
-
-```bash
-python --version
-```
-
-### 4. Run the program
-
-```bash
-python underpaid.py
-```
-
-> Replace `underpaid.py` with the actual filename if it is different.
-
----
-
-## 📂 Project Structure
-
-```
-Am-I-Being-Underpaid/
-│
-├── underpaid.py
-└── README.md
-```
+- employee.json
+- dream.json
 
 ---
 
 ## 🛠 Technologies Used
 
-- Python 3
-- Standard Python Libraries
-  - `time`
-  - `os`
-
-No external libraries or packages are required.
-
----
-
-## 📖 What I Learned
-
-Building this project helped me practice:
-
-- Breaking a program into multiple functions.
-- Passing data between functions.
-- Returning values from functions.
-- Working with dictionaries.
-- Input validation using `try` and `except`.
-- Exception handling.
-- Writing cleaner and more modular code.
-- Building a real-time terminal application.
-- Thinking about software design instead of only writing code.
+- Python
+- JSON
+- Time Module
+- File Handling
+- Functions
+- Dictionaries
+- Loops
+- Exception Handling
 
 ---
 
-## 📌 Current Status
+## ▶ How to Run
 
-🚧 This project is actively being developed.
+Clone the repository
 
-The current version is fully functional and will continue to evolve as I learn more Python concepts and software development practices.
+```bash
+git clone https://github.com/minahilmuqadus/Am-I-Being-Underpaid.git
+```
+
+Go into the project folder
+
+```bash
+cd Am-I-Being-Underpaid
+```
+
+Run
+
+```bash
+python underpaid.py
+```
 
 ---
 
-## 🎯 Planned Roadmap
 
-The goal is to gradually transform this beginner terminal application into a much more polished project by adding:
 
-- Better user experience
-- More interactive features
-- Cleaner architecture
-- Persistent data storage
-- Improved reporting
-- A graphical user interface (GUI)
+## 📸 Screenshots
+
+### 🏠 Welcome Screen
+
+![Welcome Screen](screenshots/welcome.png)
 
 ---
 
-## 🤝 Feedback
+### 💸 Live Earnings Tracker
 
-Suggestions, ideas, and improvements are always welcome.
+![Live Tracker](screenshots/live_tracker.png)
 
-If you notice something that could be improved, feel free to open an issue or share your feedback.
+---
+
+### 🚽 Potty Mode
+
+![Potty Mode](screenshots/potty_mode.png)
+
+---
+
+### 🌟 Dream Progress
+
+![Dream Progress](screenshots/dream_progress.png)
+
+## 🚀 Future Improvements
+
+- Multiple dream support
+- Salary history
+- Charts and graphs
+- Currency conversion
+- Export reports
+- GUI version
 
 ---
 
 ## 👩‍💻 Author
 
-**Minahil**
-
-Computer Science Student • Python Learner • AI/ML Enthusiast
-
-This project is part of my personal learning journey as I continue improving my programming skills through hands-on projects and real-world problem solving.git status
+Made with ❤️ by **Minahil**
